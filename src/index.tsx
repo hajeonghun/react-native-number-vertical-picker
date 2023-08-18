@@ -67,9 +67,7 @@ function VerticalPicker({
 
         if (index < (visibleItemCount / 2) - 1 || index > data.length - visibleItemCount + (visibleItemCount / 2) - 1) {
             style = { ...style, borderBottomWidth: 0 };
-        }
-
-        if ((index + 1) % 10 === 0 && index + 1 <= maximumValue) {
+        } else if ((index + 1) % (visibleItemCount / 2) === 0 && index + 1 <= maximumValue) {
             style = { ...style, width: 40, borderBottomWidth: 3 };
         }
 
@@ -87,8 +85,8 @@ function VerticalPicker({
           Math.floor(event.nativeEvent.contentOffset.y / oneItemHeight) *
           MULTIPLICITY;
 
-        if(!isReverse){
-            value = maximumValue - value;
+        if (!isReverse) {
+            value = maximumValue - value + minimumValue;
         }
 
         if (value < minimumValue || value > maximumValue) {
@@ -114,12 +112,18 @@ function VerticalPicker({
             return value !== null && value !== undefined;
         }
 
-        if (!hasFocusValue(focusValue)) {
+        let value = focusValue as number  // Type Compiler Error
+
+        if (!hasFocusValue(value)) {
             return;
         }
 
-        setTimeout(() => scrollToElement(focusValue as number), 0); // 타입 컴파일러가 제대로 추론 못함.
-    }, [focusValue, scrollToElement]);
+        if (!isReverse) {
+            value = maximumValue - value + minimumValue;
+        }
+
+        setTimeout(() => scrollToElement(value), 0);
+    }, [focusValue, maximumValue, minimumValue, scrollToElement]);
     return (
       <View style={styles.mainContainer} onLayout={onLayout}>
           <FlatList
