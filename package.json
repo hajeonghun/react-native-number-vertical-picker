@@ -15,10 +15,10 @@
   },
   "keywords": [
     "react native",
-    "horizontal picker",
+    "vertical picker",
     "number picker",
-    "number horizontal",
-    "number horizontal picker"
+    "number vertical",
+    "number vertical picker"
   ],
   "scripts": {
     "build": "tsc",
