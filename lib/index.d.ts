@@ -8,6 +8,7 @@ interface VerticalPickerProps {
     customRenderItem?: (element: ListRenderItemInfo<number>, style: ViewStyle) => ReactElement;
     thumbElement?: ReactElement;
     focusValue?: number;
+    visibleItemCount?: number;
 }
-declare function VerticalPicker({ minimumValue, maximumValue, onChangeValue, customRenderItem, thumbElement, focusValue, }: VerticalPickerProps): React.JSX.Element;
+declare function VerticalPicker({ minimumValue, maximumValue, onChangeValue, customRenderItem, thumbElement, focusValue, visibleItemCount, }: VerticalPickerProps): React.JSX.Element;
 export default VerticalPicker;

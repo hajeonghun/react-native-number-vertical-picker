@@ -18,7 +18,6 @@ import DefaultItem from './DefaultItem';
 import { ListRenderItemInfo } from '@react-native/virtualized-lists/Lists/VirtualizedList';
 
 const MULTIPLICITY = 1;
-const VISIBLE_ITEM_COUNT = 20;
 
 interface VerticalPickerProps {
     minimumValue: number;
@@ -30,6 +29,7 @@ interface VerticalPickerProps {
     ) => ReactElement;
     thumbElement?: ReactElement;
     focusValue?: number;
+    visibleItemCount?: number;
 }
 
 function VerticalPicker({
@@ -39,12 +39,13 @@ function VerticalPicker({
                             customRenderItem,
                             thumbElement,
                             focusValue,
+                            visibleItemCount = 20,
                         }: VerticalPickerProps) {
     const flatList = useRef<FlatList>(null);
     const [oneItemHeight, setOneItemHeight] = useState(0);
     const [thumbHeight, setThumbHeight] = useState(0);
     const data = Array.from(
-      { length: maximumValue - minimumValue + VISIBLE_ITEM_COUNT },
+      { length: maximumValue - minimumValue + visibleItemCount },
       (_, index) => index + 1,
     );
 
@@ -52,7 +53,7 @@ function VerticalPicker({
 
     function onLayout({ nativeEvent }: LayoutChangeEvent) {
         const calculatedWidth = Math.round(
-          nativeEvent.layout.height / VISIBLE_ITEM_COUNT,
+          nativeEvent.layout.height / visibleItemCount,
         );
         setThumbHeight(nativeEvent.layout.height / 2)
         setOneItemHeight(calculatedWidth);
@@ -62,7 +63,7 @@ function VerticalPicker({
         const { index } = element;
         let style: ViewStyle = { height: oneItemHeight }; // Require height
 
-        if (index < 9 || index > data.length - VISIBLE_ITEM_COUNT + 9) {
+        if (index < 9 || index > data.length - visibleItemCount + 9) {
             style = { ...style, borderBottomWidth: 0 };
         }
 
