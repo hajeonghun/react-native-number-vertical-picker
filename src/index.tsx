@@ -30,6 +30,7 @@ interface VerticalPickerProps {
     thumbElement?: ReactElement;
     focusValue?: number;
     visibleItemCount?: number;
+    isReverse?: boolean;
 }
 
 function VerticalPicker({
@@ -40,6 +41,7 @@ function VerticalPicker({
                             thumbElement,
                             focusValue,
                             visibleItemCount = 20,
+                            isReverse = false,
                         }: VerticalPickerProps) {
     const flatList = useRef<FlatList>(null);
     const [oneItemHeight, setOneItemHeight] = useState(0);
@@ -84,6 +86,10 @@ function VerticalPicker({
           minimumValue +
           Math.floor(event.nativeEvent.contentOffset.y / oneItemHeight) *
           MULTIPLICITY;
+
+        if(!isReverse){
+            value = maximumValue - value;
+        }
 
         if (value < minimumValue || value > maximumValue) {
             return;

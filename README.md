@@ -26,6 +26,7 @@ https://github.com/hajeonghun/react-native-number-vertical-picker
 | thumbElement | `ReactElement` | View | This is a thumbElement. If you want to change, please provide the element. |
 | focusValue | `number` | minimumValue | The number to be focused on during the first rendering |
 | visibleItemCount | `number` | 20 | Number of items to be displayed on the screen |
+| isReverse | `boolean` | false | Reverse the y-axis |
   
 ### Getting started
 Installation
