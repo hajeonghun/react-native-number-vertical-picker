@@ -63,7 +63,7 @@ function VerticalPicker({
         const { index } = element;
         let style: ViewStyle = { height: oneItemHeight }; // Require height
 
-        if (index < 9 || index > data.length - visibleItemCount + 9) {
+        if (index < (visibleItemCount / 2) - 1 || index > data.length - visibleItemCount + (visibleItemCount / 2) - 1) {
             style = { ...style, borderBottomWidth: 0 };
         }
 
