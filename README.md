@@ -1,7 +1,8 @@
-### React Native Horizontal Picker
+### React Native Vertical Picker
 
 - This is a performance-optimized numeric vertical picker.
-- **It can also be used as a basic design and can be customized.** 
+- **It can also be used as a basic design and can be customized.**
+- There is also a horizontal picker library -> [`react-native-number-horizontal-picker`](https://www.npmjs.com/package/react-native-number-horizontal-picker)
 
 ### NPM
 [![npm version](https://badge.fury.io/js/react-native-number-vertical-picker.svg)](https://www.npmjs.com/package/react-native-number-vertical-picker)
@@ -9,20 +10,12 @@
 ### Github Page - Docs
 https://github.com/hajeonghun/react-native-number-vertical-picker
 
-### Preview (Default)
-* **iPhone**  
-<img width="30%" src="https://github.com/hajeonghun/react-native-horizontal-picker/assets/52861562/5e4891c2-3138-4245-8b9c-8685bee683ed" />  
-
-* **Android**  
-<img width="30%" src="https://github.com/hajeonghun/react-native-horizontal-picker/assets/52861562/3b35a084-faa3-4b66-bad9-6e8620b8844c" />  
-
-### Preview (Custom Thumb)
-* **iPhone**  
-<img width="30%" src="https://github.com/hajeonghun/react-native-horizontal-picker/assets/52861562/b10bc147-8aae-4ccb-a38e-83d91e78adf0" />  
-
-* **Android**  
-<img width="30%" src="https://github.com/hajeonghun/react-native-horizontal-picker/assets/52861562/ca0a771b-fe1c-4e32-a489-1d5f2c76b28f" />
-
+### Preview
+| Design | iOS | Android |
+ |-------|-----|---------|
+| Default | <img width="100%" src="https://github.com/hajeonghun/react-native-number-vertical-picker/assets/52861562/5a915c7f-0c53-4c99-a9d6-89fb79b9a7ad" /> | <img width="100%" src="https://github.com/hajeonghun/react-native-number-vertical-picker/assets/52861562/69f68e6b-bdc7-4624-92c6-eb428ba51016" /> |
+| Custom Thumb | <img width="100%" src="https://github.com/hajeonghun/react-native-number-vertical-picker/assets/52861562/bb97eff1-23f0-4cda-b614-85e54cdd1850" /> | <img width="100%" src="https://github.com/hajeonghun/react-native-number-vertical-picker/assets/52861562/2a35318c-7991-4d30-b353-316b68f9a9a8" /> |
+  
 ### Props
 | Property | Type | Default | Description |
  |----------|------|---------|-------------|
@@ -32,7 +25,7 @@ https://github.com/hajeonghun/react-native-number-vertical-picker
 | customRenderItem | `(element: ListRenderItemInfo<number>, style: ViewStyle) => ReactElement` | View | This is a customizable block element, and refer to the attached Default image for the basic element |
 | thumbElement | `ReactElement` | View | This is a thumbElement. If you want to change, please provide the element. |
 | focusValue | `number` | minimumValue | The number to be focused on during the first rendering |
-
+  
 ### Getting started
 Installation
 ```
@@ -49,7 +42,7 @@ import { Text, View } from 'react-native';
 function App() {   
   return (
     <View>
-      <Text style={{ fontSize: 25 }}>{value} kg</Text>
+      <Text style={{ fontSize: 25 }}>{value} cm</Text>
         <VerticalPicker
         minimumValue={0}
         maximumValue={200}
@@ -73,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignSelf: 'center',
     borderColor: '#979797',
-    height: 30,
+    width: 30,
     borderRightWidth: 1,
   },
 });
@@ -90,7 +83,7 @@ function App() {
   const thumbElement = (
     <Icon
       style={styles.thumb}
-      name="caretdown"
+      name="caretright"
       size={30}
       color="rgba(255,0,0,0.7)" 
     />
@@ -106,7 +99,7 @@ function App() {
 
     // example code
     if (index < 9) {
-      overWriteStyle = { ...style, borderRightWidth: 0 };
+      overWriteStyle = { ...style, borderBottomWidth: 0 };
     }
     // Return the component you want to customize.
     return <CustomItem style={overWriteStyle} />;
