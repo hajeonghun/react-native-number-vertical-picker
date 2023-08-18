@@ -37,21 +37,24 @@ function VerticalPicker({
                             maximumValue,
                             onChangeValue,
                             customRenderItem,
-                            thumbElement = <View style={styles.thumb} />,
+                            thumbElement,
                             focusValue,
                         }: VerticalPickerProps) {
     const flatList = useRef<FlatList>(null);
     const [oneItemHeight, setOneItemHeight] = useState(0);
+    const [thumbHeight, setThumbHeight] = useState(0);
     const data = Array.from(
       { length: maximumValue - minimumValue + VISIBLE_ITEM_COUNT },
       (_, index) => index + 1,
     );
 
+    const defaultThumbElement = (height: number) => <View style={StyleSheet.compose(styles.thumb, {top: height})} />;
+
     function onLayout({ nativeEvent }: LayoutChangeEvent) {
         const calculatedWidth = Math.round(
           nativeEvent.layout.height / VISIBLE_ITEM_COUNT,
         );
-
+        setThumbHeight(nativeEvent.layout.height / 2)
         setOneItemHeight(calculatedWidth);
     }
 
@@ -126,7 +129,7 @@ function VerticalPicker({
                 index,
             })}
           />
-          {thumbElement}
+          {thumbElement ? thumbElement : defaultThumbElement(thumbHeight)}
       </View>
     );
 }
