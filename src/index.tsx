@@ -108,22 +108,18 @@ function VerticalPicker({
     );
 
     useEffect(() => {
-        function hasFocusValue(value: number | undefined) {
-            return value !== null && value !== undefined;
-        }
-
-        let value = focusValue as number  // Type Compiler Error
-
-        if (!hasFocusValue(value)) {
-            return;
-        }
+        let value = focusValue ?? minimumValue
 
         if (!isReverse) {
             value = maximumValue - value + minimumValue;
         }
 
+        if (isReverse ? value <= minimumValue : value >= maximumValue ) {
+            onChangeValue(minimumValue);
+        }
+
         setTimeout(() => scrollToElement(value), 0);
-    }, [focusValue, maximumValue, minimumValue, scrollToElement]);
+    }, [focusValue, maximumValue, minimumValue, scrollToElement, onChangeValue]);
     return (
       <View style={styles.mainContainer} onLayout={onLayout}>
           <FlatList
